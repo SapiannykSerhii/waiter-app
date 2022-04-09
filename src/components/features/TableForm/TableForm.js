@@ -2,9 +2,10 @@ import { useState } from "react"
 import { Form,Button } from "react-bootstrap"
 import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
-import { updateSingleTable } from "../../Redux/tablesRedux"
+import { updateSingleTable } from "../../../Redux/tablesRedux"
 import shortid from "shortid"
-import LoadingSpinner from "../common/LoadingSpinner"
+import LoadingSpinner from "../../common/LoadingSpinner"
+import styles from "../TableForm/TableForm.module.scss"
 
 const TableForm = ({ table }) => {
 
@@ -24,7 +25,7 @@ const TableForm = ({ table }) => {
 
   const handleSubmit = () => {
     setIsLoading(true)
-    dispatch(updateSingleTable({status, peopleAmount, maxPeopleAmount, bill, id}))
+    dispatch(updateSingleTable({status, peopleAmount, maxPeopleAmount, bill, id: parseInt(id)}))
     // console.log("test", handleSubmit);
   }
 
@@ -74,7 +75,7 @@ const TableForm = ({ table }) => {
       {isLoading && <LoadingSpinner/>}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlid="status" className="d-flex justify-content-start align-items-center mt-3">
-            <Form.Label className="fw-bold">Status: </Form.Label>
+            <Form.Label className="fw-bold mx-2 ">Status: </Form.Label>
             <Form.Select className="w-25" 
             onChange={e => handleStatus(e.target.value)} 
             value={status}
@@ -89,36 +90,44 @@ const TableForm = ({ table }) => {
           </Form.Group>
 
           <Form.Group constrolid="peopleAmount" className="d-flex justify-content-start align-items-center mt-3">
-            <Form.Label className="fw-bold">People:  </Form.Label>
-            <Form.Control 
+              <Form.Label className="fw-bold mx-2">People:  </Form.Label>
+
+            <div className={styles.numberInput}>
+              <Form.Control 
+                type="number"
+                value={peopleAmount}
+                onChange={e => handlePeopleAmount(e.target.value)}>
+              </Form.Control>
+            </div>  
+
+              <p className="mx-2 mt-3">/</p>
+
+            <div className={styles.numberInput}>   
+              <Form.Control
               type="number"
-              value={peopleAmount}
-              onChange={e => handlePeopleAmount(e.target.value)}
-              className="w-25">
-            </Form.Control>
-            <p className="mx-2 mt-3">/</p>
-            <Form.Control
-            type="number"
-            value={maxPeopleAmount}
-            onChange={e => handleMaxPeopleAmount(e.target.value)}
-            className="w-25">
-            </Form.Control> 
+              value={maxPeopleAmount}
+              onChange={e => handleMaxPeopleAmount(e.target.value)}>
+              </Form.Control> 
+            </div>
+
           </Form.Group>
 
          {  
           (status === 'Busy' || status === 'Reserved') &&    
           <Form.Group controlId="bill" className="d-flex justify-content-start    align-items-center mt-2 w-25">
-            <Form.Label className="fw-bold">Bill:</Form.Label>
-              <p className="mt-2 ">$</p>
-            <Form.Control
-              type="number"
-              value={bill}
-              onChange={e => setBill(e.target.value)}
-            />
+            <Form.Label className="fw-bold mx-2">Bill:</Form.Label>
+              <p className="mt-2 mx-2 fw-bold">$</p>
+            <div className={styles.numberInput}>  
+              <Form.Control
+                type="number"
+                value={bill}
+                onChange={e => setBill(e.target.value)}
+              />
+            </div>
           </Form.Group>
           } 
 
-            <Button type="submit" variant="primary">Update</Button>
+            <Button className="mt-3 mx-2" type="submit" variant="primary">Update</Button>
 
         </Form>
     </>   

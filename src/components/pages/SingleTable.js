@@ -1,7 +1,7 @@
 import {  useSelector } from "react-redux"
 import { Navigate, useParams } from "react-router-dom"
 import { getTableById } from "../../Redux/tablesRedux"
-import TableForm from "../features/TableForm"
+import TableForm from "../features/TableForm/TableForm"
 
 const SingleTable = () => {
   const { id } = useParams()
