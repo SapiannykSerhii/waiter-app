@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Form,Button } from "react-bootstrap"
 import { useDispatch } from "react-redux"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { updateSingleTable } from "../../Redux/tablesRedux"
 import shortid from "shortid"
 
@@ -23,7 +23,9 @@ const TableForm = ({ table }) => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(updateSingleTable({status, peopleAmount, maxPeopleAmount, bill, id}))
+    // console.log("test", handleSubmit);
   }
+  
   
   return(
     <>
@@ -71,9 +73,7 @@ const TableForm = ({ table }) => {
             />
           </Form.Group>
 
-          <Link className="pt-4" to={`/table/id${table.id}`} key={table.id}> 
-            <Button variant="primary">Update</Button>
-          </Link>     
+            <Button type="submit" variant="primary">Update</Button>
 
         </Form>
     </>   
