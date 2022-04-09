@@ -7,7 +7,7 @@ import LoadingSpinner from "../common/LoadingSpinner";
 
 const Tables = () => {
   const tables = useSelector(state => getAllTables(state))
-  console.log(tables)
+  // console.log(tables)
   
   return (
     <section>

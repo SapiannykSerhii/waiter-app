@@ -27,6 +27,13 @@
       "peopleAmount": "1",
       "maxPeopleAmount": "4",
       "bill": "45"
+    },
+    {
+      "id": 5,
+      "status": "Reserved",
+      "peopleAmount": "9",
+      "maxPeopleAmount": "9",
+      "bill": "90"
     }
   ]
 }

@@ -22,12 +22,49 @@ const TableForm = ({ table }) => {
   const otherStatuses = statusNames.filter(statusName => statusName !== status)
   // console.log(otherStatuses);
 
-  const handleSubmit = e => {
+  const handleSubmit = () => {
     setIsLoading(true)
     dispatch(updateSingleTable({status, peopleAmount, maxPeopleAmount, bill, id}))
     // console.log("test", handleSubmit);
   }
 
+  const handlePeopleAmount = n => {
+   if (n > maxPeopleAmount){
+     setPeopleAmount(maxPeopleAmount)
+   }else if (n <= 0){
+     setPeopleAmount(0)
+   }else {
+     setPeopleAmount(n)
+   }
+  }
+
+  const handleMaxPeopleAmount = n =>{
+    if(peopleAmount >= n){
+      setPeopleAmount(n)
+      setMaxPeopleAmount(n)
+    }else if (n >= 10){
+      setMaxPeopleAmount(10)
+    }else {
+      setMaxPeopleAmount(n)
+    }
+  }
+
+  const handleStatus = status => {
+    if (status === 'Busy'){
+      setBill(0)
+      setStatus(status)
+    } else if (status === 'Free' || status === 'Cleaning'){
+      setPeopleAmount(0)
+      setStatus(status)
+    }else if(status === 'Reserved'){
+      setPeopleAmount(0)
+      setMaxPeopleAmount(10)
+      setBill(0)
+      setStatus(status)
+    }else {
+      setStatus(status)
+    }
+  }
 
   
   
@@ -39,7 +76,7 @@ const TableForm = ({ table }) => {
           <Form.Group controlid="status" className="d-flex justify-content-start align-items-center mt-3">
             <Form.Label className="fw-bold">Status: </Form.Label>
             <Form.Select className="w-25" 
-            onChange={e => setStatus(e.target.value)} 
+            onChange={e => handleStatus(e.target.value)} 
             value={status}
             >
               <option value={status}>{status}</option>
@@ -56,18 +93,20 @@ const TableForm = ({ table }) => {
             <Form.Control 
               type="number"
               value={peopleAmount}
-              onChange={e => setPeopleAmount(e.target.value)}
+              onChange={e => handlePeopleAmount(e.target.value)}
               className="w-25">
             </Form.Control>
             <p className="mx-2 mt-3">/</p>
             <Form.Control
             type="number"
             value={maxPeopleAmount}
-            onChange={e => setMaxPeopleAmount(e.target.value)}
+            onChange={e => handleMaxPeopleAmount(e.target.value)}
             className="w-25">
             </Form.Control> 
           </Form.Group>
 
+         {  
+          (status === 'Busy' || status === 'Reserved') &&    
           <Form.Group controlId="bill" className="d-flex justify-content-start    align-items-center mt-2 w-25">
             <Form.Label className="fw-bold">Bill:</Form.Label>
               <p className="mt-2 ">$</p>
@@ -77,6 +116,7 @@ const TableForm = ({ table }) => {
               onChange={e => setBill(e.target.value)}
             />
           </Form.Group>
+          } 
 
             <Button type="submit" variant="primary">Update</Button>
 
