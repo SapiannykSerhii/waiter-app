@@ -6,6 +6,7 @@ import { updateSingleTable } from "../../../Redux/tablesRedux"
 import shortid from "shortid"
 import LoadingSpinner from "../../common/LoadingSpinner"
 import styles from "../TableForm/TableForm.module.scss"
+import PropTypes from 'prop-types'
 
 const TableForm = ({ table }) => {
 
@@ -132,6 +133,16 @@ const TableForm = ({ table }) => {
         </Form>
     </>   
   )
+}
+
+TableForm.propTypes = {
+  table : PropTypes.shape ({
+    status: PropTypes.number,
+    peopleAmount: PropTypes.number,
+    maxPeopleAmount: PropTypes.number,
+    bill: PropTypes.number,
+    id: PropTypes.number
+  })
 }
 
 export default TableForm
