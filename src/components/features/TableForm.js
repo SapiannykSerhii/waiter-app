@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import { updateSingleTable } from "../../Redux/tablesRedux"
 import shortid from "shortid"
-import LoadingSpiner from "../common/LoadingSpinner"
+import LoadingSpinner from "../common/LoadingSpinner"
 
 const TableForm = ({ table }) => {
 
@@ -34,7 +34,7 @@ const TableForm = ({ table }) => {
   return(
     <>
       <h1>Table {table.id}</h1>
-      {isLoading && <LoadingSpiner/>}
+      {isLoading && <LoadingSpinner/>}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlid="status" className="d-flex justify-content-start align-items-center mt-3">
             <Form.Label className="fw-bold">Status: </Form.Label>
