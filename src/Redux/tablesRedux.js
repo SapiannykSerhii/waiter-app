@@ -1,3 +1,4 @@
+import { API_URL } from "../config"
 
 // selectors
 export const getAllTables = state => state.tables
@@ -14,7 +15,7 @@ export const editTable = payload => ({ type: EDIT_TABLE, payload})
 
 export const fetchTables = () => {
   return (dispatch) => {
-    fetch('http://localhost:3131/api/tables')
+    fetch(`${API_URL}/tables`)
       .then(res => res.json())
       .then(tables => dispatch(updateTables(tables)))
     };
@@ -27,7 +28,7 @@ export const updateSingleTable = tableData => {
       method: 'PATCH',
 
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
 
@@ -37,7 +38,7 @@ export const updateSingleTable = tableData => {
         bill: tableData.bill
       })
     }
-    fetch(`http://localhost:3131/tables/${tableData.id}`, options)
+    fetch(`${API_URL}/tables/${tableData.id}`, options)
     .then(() => dispatch(editTable(tableData)))
   }
 }
