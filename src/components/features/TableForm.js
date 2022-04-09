@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import { updateSingleTable } from "../../Redux/tablesRedux"
 import shortid from "shortid"
-
+import LoadingSpiner from "../common/LoadingSpinner"
 
 const TableForm = ({ table }) => {
 
@@ -16,20 +16,25 @@ const TableForm = ({ table }) => {
   const [maxPeopleAmount, setMaxPeopleAmount] = useState(table.maxPeopleAmount)
   const [bill, setBill] = useState(table.bill)
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const statusNames = ['Busy', 'Cleaning', 'Free', 'Reserved']
   const otherStatuses = statusNames.filter(statusName => statusName !== status)
-  console.log(otherStatuses);
+  // console.log(otherStatuses);
 
   const handleSubmit = e => {
-    e.preventDefault();
+    setIsLoading(true)
     dispatch(updateSingleTable({status, peopleAmount, maxPeopleAmount, bill, id}))
     // console.log("test", handleSubmit);
   }
+
+
   
   
   return(
     <>
       <h1>Table {table.id}</h1>
+      {isLoading && <LoadingSpiner/>}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlid="status" className="d-flex justify-content-start align-items-center mt-3">
             <Form.Label className="fw-bold">Status: </Form.Label>

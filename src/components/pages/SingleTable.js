@@ -10,6 +10,7 @@ const SingleTable = () => {
 
   if(!table) return <Navigate to="/"/>
   return (
+    
     <TableForm table={table}/>
   )
 }
