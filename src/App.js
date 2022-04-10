@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import AddTable from "./components/pages/AddTable";
 
 import Home from "./components/pages/Home";
 import NotFound from "./components/pages/NotFount";
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/" element={ <Home/> }/>
         <Route path="/table/:id" element={<SingleTable/>} />
         <Route path="*" element={<NotFound/>}/>
+        <Route path="/table/add" element={<AddTable/>}></Route>
       </Routes>
       <Footer/>
     </Container>

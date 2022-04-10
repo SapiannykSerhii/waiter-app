@@ -5,19 +5,19 @@
       "status": "Busy",
       "peopleAmount": "2",
       "maxPeopleAmount": "4",
-      "bill": "20"
+      "bill": "10"
     },
     {
       "id": 2,
-      "status": "Free",
-      "peopleAmount": "0",
-      "maxPeopleAmount": "3",
-      "bill": "0"
+      "status": "Cleaning",
+      "peopleAmount": 0,
+      "maxPeopleAmount": 10,
+      "bill": 0
     },
     {
       "id": 3,
-      "status": "Cleaning",
-      "peopleAmount": "0",
+      "status": "Free",
+      "peopleAmount": 0,
       "maxPeopleAmount": "4",
       "bill": "0"
     },
@@ -29,11 +29,11 @@
       "bill": "45"
     },
     {
-      "id": 5,
       "status": "Reserved",
       "peopleAmount": "9",
       "maxPeopleAmount": "9",
-      "bill": "90"
+      "bill": "90",
+      "id": 5
     }
   ]
 }

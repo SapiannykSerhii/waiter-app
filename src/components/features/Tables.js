@@ -1,19 +1,26 @@
 import { Button } from "react-bootstrap";
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom";
 import { getAllTables } from "../../Redux/tablesRedux"
 import LoadingSpinner from "../common/LoadingSpinner";
-
+import { removeTableRequest } from "../../Redux/tablesRedux"
 
 const Tables = () => {
   const tables = useSelector(state => getAllTables(state))
   // console.log(tables)
-  
+  const dispatch = useDispatch()
+
+  const remove = tableId => {
+    dispatch(removeTableRequest(tableId))
+  }
   return (
     <section>
       <div  className="d-flex justify-content-between">
         <h1 className="mb-5">All Tables</h1>
       </div>
+
+      <Link  className="ms-auto p-2 mb-5" to={`/table/add`}>Add Table</Link>
+
       { tables.length === 0 && <LoadingSpinner/>}
       {
         tables.map( table => (
@@ -23,6 +30,7 @@ const Tables = () => {
             <Link className="ms-auto p-2" to={`/table/${table.id}`} key={table.id}>
               <Button variant="primary">Showe more</Button>
             </Link>
+            <Button variant="primary" onClick={() => remove(table.id)}>Delete</Button>
           </div>
         ))
       }

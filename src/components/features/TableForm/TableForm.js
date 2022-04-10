@@ -8,9 +8,9 @@ import LoadingSpinner from "../../common/LoadingSpinner"
 import styles from "../TableForm/TableForm.module.scss"
 import PropTypes from 'prop-types'
 
-const TableForm = ({ table }) => {
+const TableForm = ({ table, action ,actionText }) => {
 
-  const { id } = useParams()
+  const { id }  = useParams()
   const dispatch = useDispatch()
 
   const [status, setStatus] = useState(table.status)
@@ -26,10 +26,10 @@ const TableForm = ({ table }) => {
 
   const handleSubmit = () => {
     setIsLoading(true)
-    dispatch(updateSingleTable({status, peopleAmount, maxPeopleAmount, bill, id: parseInt(id)}))
-    // console.log("test", handleSubmit);
+    // dispatch(updateSingleTable({status, peopleAmount, maxPeopleAmount, bill, id}))
+    action({status, peopleAmount, maxPeopleAmount, bill, id})
+    console.log("test", handleSubmit);
   }
-
   const handlePeopleAmount = n => {
    if (n > maxPeopleAmount){
      setPeopleAmount(maxPeopleAmount)
@@ -136,13 +136,9 @@ const TableForm = ({ table }) => {
 }
 
 TableForm.propTypes = {
-  table : PropTypes.shape ({
-    status: PropTypes.number,
-    peopleAmount: PropTypes.number,
-    maxPeopleAmount: PropTypes.number,
-    bill: PropTypes.number,
-    id: PropTypes.number
-  })
-}
+  table: PropTypes.object,
+  action: PropTypes.func,
+  actionText: PropTypes.string,
+};
 
 export default TableForm
