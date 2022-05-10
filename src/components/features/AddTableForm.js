@@ -11,7 +11,7 @@ const AddTableForm = () => {
   const table = {
     status: 'Free',
     peopleAmount: 0,
-    maxPeopleAmount: 5,
+    maxPeopleAmount: 10,
     bill: 0,
   }
 

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Form,Button } from "react-bootstrap"
 import { useDispatch } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { updateSingleTable } from "../../../Redux/tablesRedux"
 import shortid from "shortid"
 import LoadingSpinner from "../../common/LoadingSpinner"
@@ -10,8 +10,9 @@ import PropTypes from 'prop-types'
 
 const TableForm = ({ table, action ,actionText }) => {
 
-  const { id }  = useParams()
+  const { id } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [status, setStatus] = useState(table.status)
   const [peopleAmount, setPeopleAmount] = useState(table.peopleAmount)
@@ -28,7 +29,8 @@ const TableForm = ({ table, action ,actionText }) => {
     setIsLoading(true)
     // dispatch(updateSingleTable({status, peopleAmount, maxPeopleAmount, bill, id}))
     action({status, peopleAmount, maxPeopleAmount, bill, id})
-    console.log("test", handleSubmit);
+    navigate('/')
+    // console.log("test", handleSubmit);
   }
   const handlePeopleAmount = n => {
    if (n > maxPeopleAmount){
