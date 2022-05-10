@@ -130,7 +130,7 @@ const TableForm = ({ table, action ,actionText }) => {
           </Form.Group>
           } 
 
-            <Button className="mt-3 mx-2" type="submit" variant="primary">Update</Button>
+            <Button className="mt-3 mx-2" type="submit" variant="primary">{actionText}</Button>
 
         </Form>
     </>   
